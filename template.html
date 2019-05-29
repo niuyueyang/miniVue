@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <div id="app"></div>
+  <button onclick="change('test')">test</button>
+  <button onclick="change('index')">index</button>
+</body>
+<script>
+  var Ajax={
+    get: function(url, fn) {
+      // XMLHttpRequest对象用于在后台与服务器交换数据
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url, false);
+      xhr.onreadystatechange = function() {
+        // readyState == 4说明请求已完成
+        if (xhr.readyState == 4 && xhr.status == 200 || xhr.status == 304) {
+          // 从服务器获得数据
+          fn.call(this, xhr.responseText);
+        }
+      };
+      xhr.setRequestHeader("Content-Type", "text/html");
+      xhr.send();
+    },
+  }
+  function change(hash){
+    Ajax.get('./'+hash+'.html',function (data) {
+      document.getElementById('app').innerHTML=''
+      document.getElementById('app').innerHTML=data;
+    })
+    scriptCreate("js/observe.js")
+    scriptCreate("js/TemplateCompiler.js")
+    scriptCreate("js/watcher.js")
+    scriptCreate("js/mvvm.js")
+    scriptCreate("js/model.js")
+  }
+  function scriptCreate(url){
+    var scripts=document.createElement('script');
+    scripts.type='text/javascript';
+    scripts.src=url;
+    document.getElementById('app').appendChild(scripts);
+  }
+  change('test')
+</script>
+
+
+</body>
+</html>
+</html>
