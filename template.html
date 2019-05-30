@@ -30,12 +30,9 @@
     Ajax.get('./'+hash+'.html',function (data) {
       document.getElementById('app').innerHTML=''
       document.getElementById('app').innerHTML=data;
+      scriptCreate('js/model.js')
     })
-    scriptCreate("js/observe.js")
-    scriptCreate("js/TemplateCompiler.js")
-    scriptCreate("js/watcher.js")
-    scriptCreate("js/mvvm.js")
-    scriptCreate("js/model.js")
+
   }
   function scriptCreate(url){
     var scripts=document.createElement('script');
@@ -45,7 +42,11 @@
   }
   change('test')
 </script>
-
+<script src="js/observe.js"></script>
+<script src="js/TemplateCompiler.js"></script>
+<script src="js/watcher.js"></script>
+<script src="js/mvvm.js"></script>
+<script src="js/model.js"></script>
 
 </body>
 </html>
